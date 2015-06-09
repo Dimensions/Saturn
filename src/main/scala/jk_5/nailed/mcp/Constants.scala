@@ -13,7 +13,7 @@ import scala.util.Properties
  */
 object Constants {
 
-  final val MCP_EXTENSION_NAME = "mcp"
+  final val MCP_EXTENSION_NAME = "saturn"
   final val NEWLINE = Properties.lineSeparator
   final val HASH_FUNC = "MD5"
 
@@ -64,7 +64,7 @@ object Constants {
   final val NAILED_JAVA_TEST_SOURCES = "{PROJECT_DIR}/src/test/java"
   final val NAILED_TEST_RESOURCES = "{PROJECT_DIR}/src/test/resources"
   final val PROJECT_CLEAN = "{PROJECT_DIR}/minecraft/Clean"
-  final val PROJECT_DIRTY = "{PROJECT_DIR}/minecraft/Dirty"
+  final val PROJECT_DIRTY = "{PROJECT_DIR}/minecraft/Dimensions"
   final val MINECRAFT_CLEAN_SOURCES = PROJECT_CLEAN + "/src/main/java"
   final val MINECRAFT_CLEAN_RESOURCES = PROJECT_CLEAN + "/src/main/resources"
   final val MINECRAFT_DIRTY_SOURCES = PROJECT_DIRTY + "/src/main/java"
