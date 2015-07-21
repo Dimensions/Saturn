@@ -14,6 +14,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -200,8 +202,20 @@ public abstract class CachedTask extends DefaultTask {
                 File dir = (File) input.getValue(instance);
                 hashes.addAll(HashUtils.hashAll(dir));
             }else if(m.isAnnotationPresent(InputFiles.class)){
-                FileCollection files = getProject().files(input.getValue(instance));
-                for(File file : files.getFiles()){
+                List<File> files = new ArrayList<>
+                if (input.getValue() instanceof Iterable && ((Iterable)input.getValue()).iterator().hasNext() && ((Iterable)input.getValue()).next() instanceof DelayedFile){
+                    Iterator<DelayedFile> i = ((Iterable<DelayedFile>)input.getValue()).iterator();
+                    while(i.hasNext()){
+                        DelayedFile delayedFile = i.next();
+                        File file = delayedFile.resolve();
+                        files.add(file);
+                    }
+                }else{
+                    FileCollection gradleFiles = getProject().files(input.getValue(instance));
+                    files = new ArrayList(gradleFiles.getFiles().size());
+                    files.addAll(gradleFiles.getFiles());
+                }
+                for(File file : files){
                     String hash = HashUtils.hash(file);
                     hashes.add(hash);
                     getLogger().info(hash + " " + input.getValue(instance));
